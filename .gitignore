@@ -13,6 +13,10 @@ develop-eggs/
 dist/
 downloads/
 eggs/
+lib/
+share/
+include/
+bin/
 .eggs/
 lib/
 lib64/
@@ -129,6 +133,8 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+bin/
+.DS_Store
 
 # Spyder project settings
 .spyderproject
