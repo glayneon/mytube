@@ -4,6 +4,7 @@ from enum import Enum
 from yt_dlp import YoutubeDL
 from pydantic import BaseModel, HttpUrl, ValidationError
 from loguru import logger
+import urllib.request
 import os
 
 
@@ -15,13 +16,27 @@ class MyUrl(BaseModel):
     url: HttpUrl
 
 
+def url_isalive(url):
+    code = urllib.request.urlopen(url).getcode()
+    if code == 200:
+        logger.info(f"Site {url} is Alive.")
+        return True
+    else:
+        logger.error(f"Site {url} is Dead.")
+        return False
+
+
 def validate_url(url):
     try:
         MyUrl(url=url)
     except ValidationError as e:
         return False
     else:
-        return True
+        if url_isalive(url=url):
+            return True
+        else:
+            st.error(f"{url} is not Alive.")
+            return False
 
 
 class Mytube(Enum):
