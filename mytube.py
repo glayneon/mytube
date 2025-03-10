@@ -7,11 +7,6 @@ from loguru import logger
 import urllib.request
 import os
 
-
-def load_config():
-    load_dotenv(find_dotenv(), override=True)
-
-
 class MyUrl(BaseModel):
     url: HttpUrl
 
@@ -80,7 +75,7 @@ def delete_downloaded_file(filename):
 
 if __name__ == "__main__":
     # Set pages
-    load_config()
+    load_dotenv(find_dotenv(), override=True)
     # set loguru
     logger.add(Mytube.LOGFILE.value, rotation="10 MB")
 
